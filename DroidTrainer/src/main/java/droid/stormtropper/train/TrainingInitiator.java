@@ -46,11 +46,15 @@ public class TrainingInitiator {
 				// start Training monitor
 				String currentDroidStatus = propertiesConf.getProperty("droid.training.status").toString();
 				String lastTrainingCompleteTime = propertiesConf.getProperty("droid.training.completeTime").toString();
-				Long durationSinceLastTraining = System.currentTimeMillis() - Long.parseLong(lastTrainingCompleteTime);
+				//For first time droid training
+				Long durationSinceLastTraining = 0L;
+				if(null != lastTrainingCompleteTime || lastTrainingCompleteTime.isEmpty()) {
+				durationSinceLastTraining = System.currentTimeMillis() - Long.parseLong(lastTrainingCompleteTime);
+				}
 				// After 10 mins, restart the training in case of droidstatus =
-				// completed/notstarted
+				// completed/notstarted or first time trainee
 				if (("syncUpCompleted".equals(currentDroidStatus) || "trainingNotStarted".equals(currentDroidStatus))
-						&& durationSinceLastTraining > 600000) {
+						&& (durationSinceLastTraining > 600000 || durationSinceLastTraining == 0L)) {
 					DroidTrainingMonitor.monitorTraining();
 				}
 				// Training Completed
