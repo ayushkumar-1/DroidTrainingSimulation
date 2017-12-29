@@ -51,7 +51,7 @@ public class TransferFileController {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	@RequestMapping(value = "searchForSyncUp", method = RequestMethod.GET, headers = "Accept=application/json")
+	@RequestMapping(value = "/searchForSyncUp", method = RequestMethod.GET, headers = "Accept=application/json")
 	public void scanDroidsForSyncUp(HttpServletRequest req, HttpServletResponse resp)
 			throws FileNotFoundException, IOException {
 
