@@ -69,6 +69,10 @@ public class TransferFileController {
 		// and redirect when get a response with ready for syncup
 		String statusOfContactedDroid = utilityPurpose.initiateSyncUp(myDroidInfo, propertiesConf);
 		if ("readyForSyncUp".equals(statusOfContactedDroid)) {
+			//A droid is available for syncup, hence the status changed to syncUpInProgress
+			propertiesConf.setProperty("droid.training.status", "syncUpInProgress");
+			utilityPurpose.savePropertyConfig(propertiesConf);
+			
 			resp.sendRedirect("/syncUpEstablished");
 		} else {
 			// Logic for scans of other droids
