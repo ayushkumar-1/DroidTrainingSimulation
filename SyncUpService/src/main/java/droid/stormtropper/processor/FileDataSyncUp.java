@@ -58,6 +58,8 @@ public class FileDataSyncUp {
 			f.mkdir();
 		}else if(!f.exists() && f.isFile()) {
 			f.createNewFile(); //with new strategies
+			//Now update as if already existing file getting updated
+			updateExistingStrategy(trainingFiles.getPathOfFile(), trainingFiles.getPartFile());
 		}else{
 			//update the existing strategies
 			updateExistingStrategy(trainingFiles.getPathOfFile(), trainingFiles.getPartFile());
